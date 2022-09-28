@@ -15,6 +15,10 @@ module.exports = (sequelize) => {
         return value ? 'BD' + value : null; //id = 1 ---> BD1
       }
     },
+
+    img: {
+      type: DataTypes.STRING
+    },
    
     name: {
       type: DataTypes.STRING,
