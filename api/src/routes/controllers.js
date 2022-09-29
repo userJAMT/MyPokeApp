@@ -29,12 +29,34 @@ const getPokemonsInApi = async () => {
         throw new Error('No se logro acceder a la API')
     }
 }
+
+const getPokemonByIdInApi = async (id) => {
+    try {
+        let p = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        let r = p.data;
+        let pokemon = {
+            img: r.sprites.other["official-artwork"].front_default,
+            name: r.name,
+            types: r.types.map(e=>e.type.name),
+            id: r.id,
+            hp: r.stats[0].base_stat,
+            attack: r.stats[1].base_stat,
+            defense: r.stats[2].base_stat ,
+            speed: r.stats[5].base_stat ,
+            height: r.height,
+            weight: r.weight
+        } 
+        return pokemon;
+    }catch(err){
+        return undefined;
+    }
+}
+
+
     // async function a(){
-    //     var a = await getPokemonsInApi()
-    //     console.log (a[2])
+    //     var b = await getPokemonByIdInApi(5)
+    //     console.log (b)
     // }
     // a()
 
-
-
-module.exports = { getPokemonsInApi }
+module.exports = { getPokemonsInApi, getPokemonByIdInApi }
