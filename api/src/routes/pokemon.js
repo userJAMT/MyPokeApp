@@ -18,17 +18,25 @@ router.get ('/', async (req, res) => {
             return res.json(allPokemons)
         }
         // Hay query
-        const pokemonApi = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)//FALTA ARREGLAR
+        const pokemonApi = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
         .catch(e=>undefined)
         if(!pokemonApi){ // No se encontro en la PokeApi
             const pokemonDb = await Pokemon.findOne({
                 where: {
                     name
                 },
-                include: Type
+                include: {
+                    model: Type,
+                    attributes: ["name"],
+                    through: {attributes : []}
+                }
             })
-            if(!pokemonDb.dataValues) return res.status(400).send({message: 'No se encontro el pokemon'})
-            else return res.send(pokemonDb.dataValues);
+
+            if(!pokemonDb) return res.status(400).send({message: 'No se encontro el pokemon'})
+            else {
+                pokemonDb.dataValues.types = pokemonDb.dataValues.types.map(e=>e.dataValues.name)
+                return res.send(pokemonDb.dataValues);
+            }
         }
         else{ // Si se encontro en la pokeApi
             let r = pokemonApi.data;
@@ -44,7 +52,7 @@ router.get ('/', async (req, res) => {
                 height: r.height,
                 weight: r.weight
             } 
-            return pokemon;
+            return res.send(pokemon);
         }
         
     } catch (error) {
@@ -58,22 +66,18 @@ router.get ('/:id', async (req, res) => {
         let pokemonApi = await getPokemonByIdInApi(id);
         if(!pokemonApi){
             let pokemonDb = await Pokemon.findByPk(id, {
-                include: Type,
-                attributes: [
-                    'id', 
-                    'img', 
-                    'name', 
-                    'hp', 
-                    'attack', 
-                    'defense', 
-                    'speed', 
-                    'weight', 
-                    'height'
-                ]
+                include: {
+                    model: Type,
+                    attributes: ["name"],
+                    through: {attributes : []}
+                }
             })
-            pokemonDb ? res.send(pokemonDb) 
-            : res.status(400).send({message: 'No existe el pokemon'})
-        } 
+            if (pokemonDb){
+                pokemonDb.dataValues.types = pokemonDb.dataValues.types.map(e=>e.dataValues.name)
+                return res.send(pokemonDb.dataValues);
+            }
+            else return res.status(400).send({message: 'No se encontro un pokemon con ese ID'})
+        }
         else res.send (pokemonApi)        
     }catch (err){
         res.status(500).send({message: err.message})
@@ -97,6 +101,7 @@ router.post ('/', async (req, res) => {
         where: { name: types }
     })
     pokemon.addType(type);
+    
     res.send(pokemon);
 })
 
