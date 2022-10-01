@@ -7,23 +7,34 @@ const router = Router();
 
 router.get ('/', async (req, res) => {
     try {
-        const { name } = req.query;    
+        const { name } = req.query;
         if(!name){ // No hay query
             const pokemonsInApi = await getPokemonsInApi();
-            const pokemonsInDb = await Pokemon.findAll({
-                include: Type,
+            let pokemonsInDb = await Pokemon.findAll({
+                include: {
+                    model: Type,
+                    attributes: ["name"],
+                    through: {attributes : []}
+                },
                 attributes: ['img', 'name', 'attack']
             });
+            // Reorganizamos la data
+            pokemonsInDb= pokemonsInDb.map(pokemon=>{
+                pokemon = pokemon.dataValues;
+                pokemon.types = pokemon.types.map (e=>e.dataValues.name)
+                return pokemon
+            })
             const allPokemons = pokemonsInApi.concat(pokemonsInDb);
             return res.json(allPokemons)
         }
         // Hay query
-        const pokemonApi = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+        const lowerName = name.toLowerCase()
+        const pokemonApi = await axios.get(`https://pokeapi.co/api/v2/pokemon/${lowerName}`)
         .catch(e=>undefined)
         if(!pokemonApi){ // No se encontro en la PokeApi
             const pokemonDb = await Pokemon.findOne({
                 where: {
-                    name
+                    name: lowerName
                 },
                 include: {
                     model: Type,
@@ -86,9 +97,10 @@ router.get ('/:id', async (req, res) => {
 
 router.post ('/', async (req, res) => {
     const { img, name, hp, attack, defense, speed, weight, height, types, id } = req.body;
+    const lowerName = name.toLowerCase()
     const pokemon = await Pokemon.create ({
         img,
-        name,
+        name: lowerName,
         hp,
         attack,
         defense,
@@ -101,7 +113,7 @@ router.post ('/', async (req, res) => {
         where: { name: types }
     })
     pokemon.addType(type);
-    
+    pokemon.dataValues.types = type.map(e => e.dataValues.name);
     res.send(pokemon);
 })
 

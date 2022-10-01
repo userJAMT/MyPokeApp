@@ -15,17 +15,13 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      get() {
-        const val = this.getDataValue("name");
-        return val[0].toUpperCase() + val.slice(1);
-      },
       set(value) {
         this.setDataValue("name", value.toLowerCase());
       }
     },
 
     img: {
-      type: DataTypes.STRING
+      type: DataTypes.TEXT
     },
 
     hp: {
