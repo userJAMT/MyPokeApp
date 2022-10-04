@@ -16,7 +16,7 @@ router.get ('/', async (req, res) => {
                     attributes: ["name"],
                     through: {attributes : []}
                 },
-                attributes: ['img', 'name', 'attack']
+                attributes: ['img', 'name', 'attack', 'id']
             });
             // Reorganizamos la data
             pokemonsInDb= pokemonsInDb.map(pokemon=>{
@@ -96,8 +96,9 @@ router.get ('/:id', async (req, res) => {
 })
 
 router.post ('/', async (req, res) => {
-    const { img, name, hp, attack, defense, speed, weight, height, types, id } = req.body;
+    let { img, name, hp, attack, defense, speed, weight, height, types } = req.body;
     const lowerName = name.toLowerCase()
+    if(!img) img = 'https://i.imgur.com/G4WCJsE.png';
     const pokemon = await Pokemon.create ({
         img,
         name: lowerName,
@@ -106,8 +107,7 @@ router.post ('/', async (req, res) => {
         defense,
         speed,
         weight,
-        height,
-        id
+        height
     })
     const type = await Type.findAll({
         where: { name: types }

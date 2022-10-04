@@ -4,9 +4,13 @@ import axios from 'axios'
 // Revisar si con los axios se necesita entrar a la data con res.data
 
 export function createPokemon (payload) { // Recordar que en la info de data se debe agregar lo que esta en el formulario de creacion y agregar un id de la forma "BD" + state.pokemons.length - 39
-    return async function () { 
+    return async function (dispatch) { 
         // Verificar si es necesario un loading aca
-        return await axios.post('http://localhost:3001/pokemons', payload)
+        const pokemon = await axios.post('http://localhost:3001/pokemons', payload)
+        dispatch({
+            type: CREATE_POKEMON,
+            payload: pokemon.data
+        })
     }
 }
 
@@ -16,7 +20,7 @@ export function getPokemons () {
         return axios.get('http://localhost:3001/pokemons')
         .then (res => dispatch({
             type: GET_POKEMONS,
-            payload: res
+            payload: res.data
         }))
     }
 }
@@ -27,7 +31,7 @@ export function getById (id) { // Puede ser un numero o un string de la forma "B
         return axios.get(`http://localhost:3001/pokemons/${id}`)
         .then (res => dispatch({
             type: GET_BY_ID,
-            payload: res.id
+            payload: res.data.id
         }))
     }
 }
@@ -38,8 +42,19 @@ export function getTypes () {
         return axios.get('http://localhost:3001/types')
         .then (res => dispatch({
             type: GET_TYPES,
-            payload: res
+            payload: res.data
         }))
     }
 }
 
+export function loading () {
+    return {
+        type: LOADING
+    }
+}
+
+export function clear () {
+    return {
+        type: CLEAR
+    }
+}

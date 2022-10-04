@@ -19,7 +19,8 @@ const getPokemonsInApi = async () => {
                     img: r.sprites.other["official-artwork"].front_default,
                     name: r.name,
                     types: r.types.map(e=>e.type.name),
-                    attack:r.stats[1].base_stat                    
+                    attack:r.stats[1].base_stat,
+                    id: r.id               
                 }
             })
             return pokemon;
