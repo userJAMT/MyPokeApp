@@ -1,17 +1,33 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getPokemons, getTypes } from "../../actions/index.js";
-import Card from '../Card/Card.jsx';
 import { Link } from 'react-router-dom';
 import './Home.css';
 
+import { useDispatch, useSelector } from "react-redux";
+import { getPokemons, getTypes } from "../../actions/index.js";
+
+import Card from '../Card/Card.jsx';
+import Pagination from '../Pagination/Pagination.jsx'
+
 function Home() {
 
+  // Basics
   const dispatch = useDispatch();
   const allPokemons = useSelector(state => state.pokemons);
   const allTypes = useSelector(state => state.types);
+  
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pokemonsPerPage, setPokemonsPerPage] = useState(12);        // 12 pokemons per page
+  const indexOfLastPokemon = currentPage * pokemonsPerPage; // In the current page
+  const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage; // In the current page
+  const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
 
+  function paginate (pageNumber) {
+    setCurrentPage(pageNumber)
+  };
+
+  // ComponentDidMount
   useEffect(() => {
     dispatch(getPokemons());
     dispatch(getTypes());
@@ -22,8 +38,8 @@ function Home() {
       <div className="filters"> Filter       
          by type <select className="by_type">
           <option value='all'> All </option>
-          {
-            allTypes?.map((type, i) =>{
+          {                                    // <<<<<---------------<<<>>>>------------------->>>>>
+            allTypes?.map((type, i) =>{        // Recordar setear la page en 1 cuando filtre u ordene
               return <option key={i} value={type.name}>{type.name}</option>
             })
           }
@@ -48,15 +64,22 @@ function Home() {
         </select>
       </div>
 
+      <Pagination 
+      pokemonsPerPage = {pokemonsPerPage} 
+      totalPokemons = {allPokemons.length} 
+      paginate={paginate} 
+      />
+
       <div className='cards'>
-        {!allPokemons? <h4>Can't find Pokemons</h4> : allPokemons.map (el => {
-            return (
-              <Link to = {`/details/${el.id}`}>
-                <Card name = {el.name} img = {el.img} types = {el.types} />
-              </Link>
+        {!currentPokemons? <h4>Can't find Pokemons</h4> : currentPokemons.map ((el, index) => {
+          return (
+            <Link to = {`/details/${el.id}`}>
+              <Card key = {el.id} name = {el.name} img = {el.img} types = {el.types} />
+            </Link>
             )
-        })} 
+          })} 
       </div>
+
     </div>
   )
 }

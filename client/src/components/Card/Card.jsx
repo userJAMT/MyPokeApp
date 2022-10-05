@@ -6,8 +6,8 @@ function Card({name, types, img}) {
     <div className='card'>
       <h2> {name} </h2>
       <img src={img} alt = 'img not found' width="200px" height="250px"/>
-      {types?.map(e=>{
-        return <h4>{e}</h4>
+      {types?.map((e,i)=>{
+        return <h4 key={i}>{e}</h4>
       })} 
     </div>
   )

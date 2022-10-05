@@ -1,4 +1,15 @@
-import { CREATE_POKEMON, GET_POKEMONS, GET_BY_ID, GET_TYPES, DELETE, LOADING, CLEAR } from "../actions_types"
+import { 
+    CREATE_POKEMON, 
+    GET_POKEMONS, 
+    GET_BY_ID, 
+    GET_TYPES,
+    FILTER_POKEMON_BY_TYPE,
+    FILTER_POKEMON_CREATED,
+    ORDER_BY_NAME,
+    ORDER_BY_ATTACK,
+    LOADING, 
+    CLEAR 
+} from "../actions_types"
 import axios from 'axios'
 
 // Revisar si con los axios se necesita entrar a la data con res.data
@@ -44,6 +55,34 @@ export function getTypes () {
             type: GET_TYPES,
             payload: res.data
         }))
+    }
+}
+
+export function filterByType (payload) {
+    return {
+        type: FILTER_POKEMON_BY_TYPE,
+        payload
+    }
+}
+
+export function filterCreated (payload) {
+    return {
+        type: FILTER_POKEMON_CREATED,
+        payload
+    }
+}
+
+export function orderByName (payload) {
+    return {
+        type: ORDER_BY_NAME,
+        payload
+    }
+}
+
+export function orderByAttack (payload) {
+    return {
+        type: ORDER_BY_ATTACK,
+        payload
     }
 }
 

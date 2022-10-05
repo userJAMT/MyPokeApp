@@ -45,7 +45,7 @@ router.get ('/', async (req, res) => {
 
             if(!pokemonDb) return res.status(400).send({message: 'No se encontro el pokemon'})
             else {
-                pokemonDb.dataValues.types = pokemonDb.dataValues.types.map(e=>e.dataValues.name)
+                pokemonDb.dataValues.types = pokemonDb.dataValues.types.map(e=>e.dataValues.name);
                 return res.send(pokemonDb.dataValues);
             }
         }
@@ -62,8 +62,9 @@ router.get ('/', async (req, res) => {
                 speed: r.stats[5].base_stat ,
                 height: r.height,
                 weight: r.weight
-            } 
-            return res.send(pokemon);
+            }
+            pokemon.id <= 40 ? res.send(pokemon) // Puedo setear el 40 a una constante para definir cuantos pokemones me traigo de la api y hacer un limite dinamico. Recordar cambiarlo tambien en getPokemonsInApi
+            : res.status(404).send({message: 'Pokemon not found'})
         }
         
     } catch (error) {

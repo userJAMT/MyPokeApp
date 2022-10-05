@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 function Create() {
 
   const dispatch = useDispatch();
-  let allTypes = useSelector(state => state.types);
+  // let allTypes = useSelector(state => state.types);
   let allPokemons = useSelector(state => state.pokemons);
 
   const history = useHistory();
@@ -26,7 +26,7 @@ function Create() {
     speed: 10,
     weight: 50,
     height: 5,
-    types: [],
+    types: []
   }
 
   let [input, setInput] = React.useState(initialState)
@@ -45,7 +45,6 @@ function Create() {
   return (
     <div>
       <h2> CREATE POKEMON </h2>
-      <div>{allPokemons.lenght}</div>
       <hr/>
       <form onSubmit={handleOnSubmit}>
         <div>
