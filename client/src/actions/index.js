@@ -5,8 +5,8 @@ import {
     GET_TYPES,
     FILTER_POKEMON_BY_TYPE,
     FILTER_POKEMON_CREATED,
-    ORDER_BY_NAME,
-    ORDER_BY_ATTACK,
+    SORT_BY_NAME,
+    SORT_BY_ATTACK,
     LOADING, 
     CLEAR 
 } from "../actions_types"
@@ -72,16 +72,16 @@ export function filterCreated (payload) {
     }
 }
 
-export function orderByName (payload) {
+export function sortByName (payload) {
     return {
-        type: ORDER_BY_NAME,
+        type: SORT_BY_NAME,
         payload
     }
 }
 
-export function orderByAttack (payload) {
+export function sortByAttack (payload) {
     return {
-        type: ORDER_BY_ATTACK,
+        type: SORT_BY_ATTACK,
         payload
     }
 }

@@ -4,7 +4,14 @@ import { Link } from 'react-router-dom';
 import './Home.css';
 
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemons, getTypes } from "../../actions/index.js";
+import { 
+  getPokemons, 
+  getTypes, 
+  filterByType, 
+  filterCreated, 
+  sortByName,
+  sortByAttack
+} from "../../actions/index.js";
 
 import Card from '../Card/Card.jsx';
 import Pagination from '../Pagination/Pagination.jsx'
@@ -17,11 +24,12 @@ function Home() {
   const allTypes = useSelector(state => state.types);
   
   // Pagination
+  const [order, setOrder] = useState('')
   const [currentPage, setCurrentPage] = useState(1);
-  const [pokemonsPerPage, setPokemonsPerPage] = useState(12);        // 12 pokemons per page
-  const indexOfLastPokemon = currentPage * pokemonsPerPage; // In the current page
+  const [pokemonsPerPage, setPokemonsPerPage] = useState(12);         // 12 pokemons per page
+  const indexOfLastPokemon = currentPage * pokemonsPerPage;          // In the current page
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage; // In the current page
-  const currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
+  let currentPokemons = allPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
 
   function paginate (pageNumber) {
     setCurrentPage(pageNumber)
@@ -33,19 +41,44 @@ function Home() {
     dispatch(getTypes());
   },[dispatch]);
 
+  // Handles
+  function handleFilterByType (e) {
+    if (e.target.value === 'all') dispatch(getPokemons())
+    else dispatch(filterByType(e.target.value))
+    setCurrentPage(1)
+  }
+
+  function handleFilterCreated (e) {
+    if (e.target.value === 'all') dispatch(getPokemons())
+    else dispatch(filterCreated(e.target.value))
+    setCurrentPage(1)
+  }
+
+  function handleSortByName (e) {
+    dispatch(sortByName(e.target.value))
+    setCurrentPage(1)
+    setOrder(`${e.target.value} order`)
+  }
+
+  function handleSortByAttack (e) {
+    dispatch(sortByAttack(e.target.value))
+    setCurrentPage(1)
+    setOrder(`${e.target.value} order`)
+  }
+
   return (
     <div>
       <div className="filters"> Filter       
-         by type <select className="by_type">
+         by type <select className="by_type" onChange={e => handleFilterByType(e)}>
           <option value='all'> All </option>
-          {                                    // <<<<<---------------<<<>>>>------------------->>>>>
-            allTypes?.map((type, i) =>{        // Recordar setear la page en 1 cuando filtre u ordene
+          {
+            allTypes?.map((type, i) =>{
               return <option key={i} value={type.name}>{type.name}</option>
             })
           }
         </select>
 
-        by origin <select className="by_origin">
+        by origin <select className="by_origin" onChange={e => handleFilterCreated(e)}>
           <option value="all"> All </option>
           <option value="api"> Existing </option>
           <option value="db"> Created </option>
@@ -53,14 +86,14 @@ function Home() {
       </div>
 
       <div className="sort"> Sort 
-        by name <select className="by_name">
+        by name <select className="by_name" onChange={e => handleSortByName(e)}>
           <option value="asc"> Ascendant </option>
           <option value="dsc"> Descendant </option>
         </select>
 
-        by attack <select className="by_attack">
+        by attack <select className="by_attack" onChange={e => handleSortByAttack(e)}>
           <option value="asc"> Ascendant </option>
-          <option value=""> Descendant </option>
+          <option value="dsc"> Descendant </option>
         </select>
       </div>
 
