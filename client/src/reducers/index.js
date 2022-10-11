@@ -3,6 +3,7 @@ import {
     GET_POKEMONS, 
     GET_BY_ID, 
     GET_TYPES,
+    GET_POKEMON_BY_NAME,
     FILTER_POKEMON_BY_TYPE,
     FILTER_POKEMON_CREATED,
     SORT_BY_NAME,
@@ -47,6 +48,12 @@ export default function reducer (state = initialState, action){
                 ...state,
                 loading: false,
                 types: action.payload
+            }
+        
+        case GET_POKEMON_BY_NAME:
+            return {
+                ...state,
+                pokemons: [action.payload]
             }
 
         case FILTER_POKEMON_BY_TYPE:

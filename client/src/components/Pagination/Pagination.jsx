@@ -1,16 +1,16 @@
 import React from 'react'
 
-function Pagination({totalPokemons, pokemonsPerPage, paginate}) {
+function Pagination({totalPokemons, pokemonsPerPage, paginate, currentPage}) {
     const pageNumber = []
     for (let i = 1; i <= Math.ceil(totalPokemons/pokemonsPerPage); i++) {
         pageNumber.push(i)
     }
   return (
-    <div>
+    <div className='pagesNumbers'>
         <ul className="pagination">
             {pageNumber?.map(number => (
                 <li key={number} className='number'>
-                    <a onClick={() => paginate(number)}>{number}</a> 
+                    <button onClick={() => paginate(number)} disabled = {currentPage === number} >{number}</button> 
                 </li>
             ))}
         </ul>

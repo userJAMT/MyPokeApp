@@ -3,6 +3,7 @@ import {
     GET_POKEMONS, 
     GET_BY_ID, 
     GET_TYPES,
+    GET_POKEMON_BY_NAME,
     FILTER_POKEMON_BY_TYPE,
     FILTER_POKEMON_CREATED,
     SORT_BY_NAME,
@@ -31,6 +32,16 @@ export function getPokemons () {
         return axios.get('http://localhost:3001/pokemons')
         .then (res => dispatch({
             type: GET_POKEMONS,
+            payload: res.data
+        }))
+    }
+}
+
+export function getPokemonByName (name) {
+    return function (dispatch) {
+        return axios.get ('http://localhost:3001/pokemons?name=' + name)
+        .then (res => dispatch({
+            type: GET_POKEMON_BY_NAME,
             payload: res.data
         }))
     }

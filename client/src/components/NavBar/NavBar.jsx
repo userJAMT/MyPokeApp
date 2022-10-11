@@ -7,7 +7,6 @@ function NavBar() {
       <ul>
         <li> <Link to = '/home'> HOME </Link> </li>
         <li> <Link to = '/create'> CREATE </Link> </li>
-        <li>BARRA DE BUSQUEDA</li>
       </ul>
     </div>
   )

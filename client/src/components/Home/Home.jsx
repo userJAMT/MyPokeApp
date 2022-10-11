@@ -14,7 +14,8 @@ import {
 } from "../../actions/index.js";
 
 import Card from '../Card/Card.jsx';
-import Pagination from '../Pagination/Pagination.jsx'
+import Pagination from '../Pagination/Pagination.jsx';
+import SearchBar from "../SearchBar/SearchBar";
 
 function Home() {
 
@@ -42,25 +43,35 @@ function Home() {
   },[dispatch]);
 
   // Handles
+
+  function handleReload(e) {
+    e.preventDefault()
+    dispatch(getPokemons())
+  }
+
   function handleFilterByType (e) {
+    e.preventDefault()
     if (e.target.value === 'all') dispatch(getPokemons())
     else dispatch(filterByType(e.target.value))
     setCurrentPage(1)
   }
 
   function handleFilterCreated (e) {
+    e.preventDefault()
     if (e.target.value === 'all') dispatch(getPokemons())
     else dispatch(filterCreated(e.target.value))
     setCurrentPage(1)
   }
 
   function handleSortByName (e) {
+    e.preventDefault()
     dispatch(sortByName(e.target.value))
     setCurrentPage(1)
     setOrder(`${e.target.value} order`)
   }
 
   function handleSortByAttack (e) {
+    e.preventDefault()
     dispatch(sortByAttack(e.target.value))
     setCurrentPage(1)
     setOrder(`${e.target.value} order`)
@@ -68,6 +79,8 @@ function Home() {
 
   return (
     <div>
+      <SearchBar setCurrentPage = {setCurrentPage}/>
+      <button onClick={e => handleReload(e)}> Reload all pokemons </button>
       <div className="filters"> Filter       
          by type <select className="by_type" onChange={e => handleFilterByType(e)}>
           <option value='all'> All </option>
@@ -98,9 +111,11 @@ function Home() {
       </div>
 
       <Pagination 
+      className = 'paginates'
       pokemonsPerPage = {pokemonsPerPage} 
       totalPokemons = {allPokemons.length} 
       paginate={paginate} 
+      currentPage = {currentPage}
       />
 
       <div className='cards'>
@@ -113,7 +128,15 @@ function Home() {
           })} 
       </div>
 
-    </div>
+      <Pagination 
+      className = 'paginates'
+      pokemonsPerPage = {pokemonsPerPage} 
+      totalPokemons = {allPokemons.length} 
+      paginate={paginate} 
+      currentPage = {currentPage}
+      />
+
+    </div>    
   )
 }
 
