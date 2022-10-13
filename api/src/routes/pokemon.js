@@ -43,7 +43,7 @@ router.get ('/', async (req, res) => {
                 }
             })
 
-            if(!pokemonDb) return res.status(400).send({message: 'No se encontro el pokemon'})
+            if(!pokemonDb) return res.status(404).send({message: 'Pokemon not found'})
             else {
                 pokemonDb.dataValues.types = pokemonDb.dataValues.types.map(e=>e.dataValues.name);
                 return res.send(pokemonDb.dataValues);

@@ -9,20 +9,19 @@ import {
     SORT_BY_NAME,
     SORT_BY_ATTACK,
     LOADING, 
-    CLEAR 
+    CLEAR,
+    NOT_FOUND,
+    BACKUP
 } from "../actions_types"
 import axios from 'axios'
 
-// Revisar si con los axios se necesita entrar a la data con res.data
-
-export function createPokemon (payload) { // Recordar que en la info de data se debe agregar lo que esta en el formulario de creacion y agregar un id de la forma "BD" + state.pokemons.length - 39
-    return async function (dispatch) { 
-        // Verificar si es necesario un loading aca
+export function createPokemon (payload) {
+    return async function (dispatch) {    
         const pokemon = await axios.post('http://localhost:3001/pokemons', payload)
         dispatch({
             type: CREATE_POKEMON,
             payload: pokemon.data
-        })
+        })       
     }
 }
 
@@ -45,6 +44,12 @@ export function getPokemonByName (name) {
             type: GET_POKEMON_BY_NAME,
             payload: res.data
         }))
+        .catch(e=>{
+            dispatch({
+                type: NOT_FOUND,
+                payload: e.response.data
+            })
+        })
     }
 }
 
@@ -106,5 +111,11 @@ export function loading () {
 export function clear () {
     return {
         type: CLEAR
+    }
+}
+
+export function backup () {
+    return {
+        type: BACKUP
     }
 }

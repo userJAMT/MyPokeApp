@@ -9,7 +9,9 @@ import {
     SORT_BY_NAME,
     SORT_BY_ATTACK,
     LOADING, 
-    CLEAR 
+    CLEAR,
+    NOT_FOUND,
+    BACKUP
 } from "../actions_types"
 
 const initialState = {
@@ -17,7 +19,8 @@ const initialState = {
     allPokemons: [],
     pokemonDetail: {},
     types: [],
-    loading: false
+    loading: false,
+    notFound: false
 }
 
 export default function reducer (state = initialState, action){
@@ -31,6 +34,7 @@ export default function reducer (state = initialState, action){
             return{
                 ...state,
                 loading: false,
+                notFound: false,
                 pokemons: action.payload,
                 allPokemons: action.payload
             }
@@ -51,6 +55,7 @@ export default function reducer (state = initialState, action){
         case GET_POKEMON_BY_NAME:
             return {
                 ...state,
+                notFound: false,
                 loading: false,
                 pokemons: [action.payload]
             }
@@ -112,7 +117,23 @@ export default function reducer (state = initialState, action){
         case CLEAR:
             return {
                 ...state,
+                notFound: false,
                 pokemonDetail: {}
+            }
+
+        case NOT_FOUND:
+            return {
+                ...state,
+                loading: false,
+                notFound: true
+            }
+
+        case BACKUP:
+            return {
+                ...state,
+                loading:false,
+                notFound: false,
+                pokemons: state.allPokemons
             }
 
         default: return state

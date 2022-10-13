@@ -1,3 +1,12 @@
+.header{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    padding: 2rem;
+    border: solid blue 3px;
+
+}
+
 .main{
-    margin-top: 3rem;
+    margin: 3rem;
 }

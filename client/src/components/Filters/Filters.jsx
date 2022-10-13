@@ -15,7 +15,7 @@ function Filters({ allTypes, onFilter }) {
             setFilters({
                 ...filters,
                 types: [...filters.types, e.target.value]
-                })
+            })
         }
     }
 
@@ -31,7 +31,6 @@ function Filters({ allTypes, onFilter }) {
     const handleSubmit = (e) => {
         e.preventDefault()
         onFilter(filters)
-        e.target.value = 'default'
         setFilters(initialState)
     }
 

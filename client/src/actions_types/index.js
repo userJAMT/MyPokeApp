@@ -11,3 +11,5 @@ export const SORT_BY_ATTACK = 'SORT_BY_ATTACK';
 
 export const LOADING = "LOADING";
 export const CLEAR = "CLEAR";
+export const NOT_FOUND = "NOT_FOUND";
+export const BACKUP = "BACKUP";
