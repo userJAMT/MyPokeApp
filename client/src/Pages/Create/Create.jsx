@@ -5,8 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 function validations (allPokemons, input) {
   let errors = {};
-  const validName = /^[a-zA-ZñÑ]+$/i;
-  const validNum = /^\d+$/;
+  const validName = /^[a-zA-ZñÑ\s]+$/i;
   const validUrl = /^(ftp|http|https):\/\/[^ "]+\.\S+$/;
 
   if (!input.name) errors.name = "Name is required";

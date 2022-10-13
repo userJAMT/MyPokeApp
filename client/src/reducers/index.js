@@ -24,8 +24,7 @@ export default function reducer (state = initialState, action){
     switch (action.type ){
         case CREATE_POKEMON:
             return {
-                ...state,
-                pokemonDetail: action.payload
+                ...state
             }
         
         case GET_POKEMONS:
@@ -46,28 +45,28 @@ export default function reducer (state = initialState, action){
         case GET_TYPES:
             return {
                 ...state,
-                loading: false,
                 types: action.payload
             }
         
         case GET_POKEMON_BY_NAME:
             return {
                 ...state,
+                loading: false,
                 pokemons: [action.payload]
             }
 
         case FILTER_POKEMON_BY_TYPE:
             return {
                 ...state,
-                pokemons: state.allPokemons.filter(p=>p.types.includes(action.payload))
+                pokemons: state.pokemons.filter(p=>p.types.includes(action.payload))
             }
 
         case FILTER_POKEMON_CREATED:
             return {
                 ...state,
                 pokemons: action.payload === 'db' 
-                ? state.allPokemons.filter(p=>isNaN(p.id))
-                : state.allPokemons.filter(p=>!isNaN(p.id))
+                ? state.pokemons.filter(p=>isNaN(p.id))
+                : state.pokemons.filter(p=>!isNaN(p.id))                 
             }
 
         case SORT_BY_NAME:

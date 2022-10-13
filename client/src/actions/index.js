@@ -39,6 +39,7 @@ export function getPokemons () {
 
 export function getPokemonByName (name) {
     return function (dispatch) {
+        dispatch(loading())
         return axios.get ('http://localhost:3001/pokemons?name=' + name)
         .then (res => dispatch({
             type: GET_POKEMON_BY_NAME,
@@ -47,20 +48,19 @@ export function getPokemonByName (name) {
     }
 }
 
-export function getById (id) { // Puede ser un numero o un string de la forma "BD" + numero
+export function getById (id) {
     return function (dispatch) {
         dispatch(loading())
         return axios.get(`http://localhost:3001/pokemons/${id}`)
         .then (res => dispatch({
             type: GET_BY_ID,
-            payload: res.data.id
+            payload: res.data
         }))
     }
 }
 
 export function getTypes () {
     return function (dispatch) {
-        // dispatch(loading()) // Revisar si es necesario un loading aca
         return axios.get('http://localhost:3001/types')
         .then (res => dispatch({
             type: GET_TYPES,

@@ -1,23 +1,19 @@
 import React from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 
-import { getPokemonByName } from '../../actions/index.js'
+function SearchBar({onSearch}) {
 
-function SearchBar({setCurrentPage}) {
-
-    const dispatch = useDispatch();
     const [name, setName] = useState('')
 
-    function handleInputChange (e) {
-        e.preventDefault();
-        setName(e.target.value.toLowerCase());
+    const handleInput = (e) => {
+        e.preventDefault()
+        setName(e.target.value)
     }
+
     function handleSubmit (e) {
         e.preventDefault();
-        dispatch(getPokemonByName(name))
+        onSearch(name.toLowerCase())
         setName('')
-        setCurrentPage(1)
     }
 
   return (
@@ -27,7 +23,7 @@ function SearchBar({setCurrentPage}) {
         type='text' 
         placeholder='Pokemon name...'
         value={name}
-        onChange={(e) => handleInputChange(e)}
+        onChange={e=>handleInput(e)}
         />
         <button className='SearchButton' type='submit'>
             Search

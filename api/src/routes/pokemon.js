@@ -19,7 +19,6 @@ router.get ('/', async (req, res) => {
                 attributes: ['img', 'name', 'attack', 'id']
             });
             // Reorganizamos la data
-            console.log(pokemonsInDb[0].dataValues.types)
             pokemonsInDb= pokemonsInDb.map(pokemon=>{
                 pokemon = pokemon.dataValues;
                 pokemon.types = pokemon.types.map (e=>e.dataValues.name)
