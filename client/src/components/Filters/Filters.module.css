@@ -1,0 +1,18 @@
+.filters{
+    padding: 2rem;
+    flex-direction: row;
+    justify-content:space-between;
+    border: solid black 1px;
+    border-radius: 25px;
+}
+.first{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.second{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

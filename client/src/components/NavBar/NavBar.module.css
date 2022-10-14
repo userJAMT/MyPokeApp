@@ -1,33 +1,66 @@
 .header{
     display: flex;
     flex-direction: column;
-    background-color: aqua;
     margin: 1rem;
     z-index: 100;
     height: fit-content;
     align-items: center;
 }
 
-.header img {
+
+.logo {
     height: 4rem;
-    filter: drop-shadow(0 0 8px white);
+    width: 10rem;
+    background-color: #000;
+    border-radius: 20px;
+    transition: all .3s;
+}
+
+.logo img{
+    height: 4rem;
+    width: 10rem;
+    background-image:linear-gradient(45deg, red, yellow);
+    border-radius: 20px;
+    transition: all .2s;
+}
+
+.logo:hover {
+    box-shadow: 0px 0px 30px 1px rgb(0, 0, 0);
+}
+
+.logo img:hover {
+    transform: scale(0.99);
+    border-radius: 20px;
+    background-image:linear-gradient(-45deg, red, yellow);
 }
 
 .create {
-    width: fit-content;
-    padding: 2px;
-    background-color: whitesmoke;
-    border: black solid 1px;
-    border-radius: 20px;
-    color: black;
+    margin: 1rem;
 }
 
-.create Link{
-    text-decoration: none;
+.create button {
+    padding: 1em 1em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-image:linear-gradient(45deg, red, yellow);
+    border: solid black 2px;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    outline: none;
 }
 
-.create:hover{
-    color: aliceblue;
-    background-color: gray;
+.create button:hover {
+    background-image:linear-gradient(-45deg, red, yellow);
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.748);
+    color: #000;
+    transform: translateY(-1px);
 }
-
+  
+.create button:active {
+    transform: translateY(-1px);
+}

@@ -85,7 +85,7 @@ function Create() {
   return (
     <div>
       <h2> CREATE POKEMON </h2>
-      <hr/>
+      <br/>
       <form onSubmit={handleOnSubmit}>
         <div>
           <label>Pokemon's name:</label>

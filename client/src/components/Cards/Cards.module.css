@@ -4,5 +4,21 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     gap: 30px;
-    border: solid 2px black;
   }
+.notfound{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.notfound div{
+    top: 0;
+    margin-bottom: 1rem;
+    font-weight: bolder;
+}
+.notfound img{
+  margin-top: -6rem;
+  margin-bottom: -5rem;
+    width: 50%;
+    height: 50%;
+}

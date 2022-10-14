@@ -9,7 +9,7 @@ function Sort({ onSort }) {
     }
     
     return (
-        <div className="sort">
+        <div className={s.sort}>
             <div className={s.sortByName}>                
                 <select name='name' onChange={e => handleOnChange(e)}>
                     <option value="asc"> A - Z </option>
@@ -18,10 +18,10 @@ function Sort({ onSort }) {
             </div>
 
             <div className={s.sortByAttack}>                
-            <select name='attack' onChange={e => handleOnChange(e)}>
-                <option value="asc"> Weaker to Stronger </option>
-                <option value="dsc"> Stronger to Weaker </option>
-            </select>
+                <select name='attack' onChange={e => handleOnChange(e)}>
+                    <option value="asc"> Weaker to Stronger </option>
+                    <option value="dsc"> Stronger to Weaker </option>
+                </select>
             </div>
         </div> 
     )

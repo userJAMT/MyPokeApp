@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import s from './Home.module.css';
+import dugtrio from '../../img/dugtrio.png'
 
 import { useDispatch, useSelector } from "react-redux";
 import { 
@@ -78,17 +79,24 @@ function Home() {
   }
 
   return (
-    <div>
+    <div className={s.body}>
       <div className={s.header}>
-        <SearchBar onSearch={onSearch}/>
-        <button onClick={e => handleReload(e)}> Reload all pokemons </button>
-        <Filters allTypes={allTypes} onFilter={onFilter}/>
-        <Sort onSort={onSort}/>
+        <div className={s.first}>
+          <SearchBar onSearch={onSearch}/>
+          <button onClick={e => handleReload(e)}> Reload all pokemons </button>
+          <Sort onSort={onSort}/>
+        </div>
+        <div className={s.second}>
+          <Filters allTypes={allTypes} onFilter={onFilter}/>
+        </div>
       </div>
 
       <div className={s.main}>
         {loading? <Loading/>
-        : notFound? <div>Pokemon not found</div> 
+        : notFound? <div className={s.notfound}>
+          <div>POKEMON NOT FOUND</div>
+          <img src={dugtrio} alt="Not found" />
+        </div> 
         :<div>
           <Pagination 
           className = 'paginates'

@@ -1,12 +1,48 @@
 .header{
+    width: 36rem;
+    max-width: 15rem;
     display: flex;
+    height: fit-content;
     flex-direction: column;
     margin: 1rem;
-    padding: 2rem;
-    border: solid blue 3px;
-
+    margin-top: 5rem;
+    padding: 1rem;
+    border-radius: 40px;
+    background-color:#664545
+}
+.first{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+.second{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    align-items: center;
+}
+.main{
+    margin: 1rem;
 }
 
-.main{
-    margin: 3rem;
+.body{
+    display: flex;
+}
+
+.notfound{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.notfound div{
+    top: 0;
+    margin-bottom: 1rem;
+    font-weight: bolder;
+}
+.notfound img{
+    width: 200px;
+    height: 300px;
 }

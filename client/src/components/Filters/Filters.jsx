@@ -35,47 +35,52 @@ function Filters({ allTypes, onFilter }) {
     }
 
     return (
-        <form className={s.filters} onSubmit={e => handleSubmit(e)}>  
-            <label> Filter by Types </label> 
-            <select 
-            name='types'
-            className={s.typesSelection}
-            onChange={e => handleFilterByType(e)}
-            disabled = {filters.types.length >= 2}
-            defaultValue='default'
-            >
-                <option value='default' disabled> Types </option>
-                {
-                allTypes?.map((el, i) =>{
-                    return (
-                        <option 
-                        key={'option '+i} 
-                        value={el.name}
-                        >
-                            {el.name}
-                        </option>
-                    )
-                })
-                }
-            </select>
-            {filters.types?.map((el, i) => {
-                return <span key={'span ' + i}>
-                    {el}
-                    <button key={'button ' + i} type='button' onClick={() => handleDelete(el)}>X</button>
-                </span>
-            })}
-            
-            <label> Filter by Origin</label>
-            <select 
-            name='origin'
-            className={s.origin} 
-            onChange={e => handleFilterByOrigin(e)}
-            defaultValue=''
-            >
-                <option value=''> All </option>
-                <option value="api"> Existing </option>
-                <option value="db"> Created </option>
-            </select>
+        <form className={s.filters} onSubmit={e => handleSubmit(e)}>
+            <div className={s.first}>
+                <label> Filter by Types </label> 
+                <select 
+                name='types'
+                className={s.typesSelection}
+                onChange={e => handleFilterByType(e)}
+                disabled = {filters.types.length >= 2}
+                defaultValue='default'
+                >
+                    <option value='default' disabled> Types </option>
+                    {
+                    allTypes?.map((el, i) =>{
+                        return (
+                            <option 
+                            key={'option '+i} 
+                            value={el.name}
+                            >
+                                {el.name}
+                            </option>
+                        )
+                    })
+                    }
+                </select>
+                {filters.types?.map((el, i) => {
+                    return <span key={'span ' + i}>
+                        {el}
+                        <button key={'button ' + i} type='button' onClick={() => handleDelete(el)}>X</button>
+                    </span>
+                })}
+            </div> 
+            <br/>
+            <div className={s.second}>
+                <label> Filter by Origin</label>
+                <select 
+                name='origin'
+                className={s.origin} 
+                onChange={e => handleFilterByOrigin(e)}
+                defaultValue=''
+                >
+                    <option value=''> All </option>
+                    <option value="api"> Existing </option>
+                    <option value="db"> Created </option>
+                </select>
+                <br/>
+            </div>
             <input type="submit"/>
         </form>
     )

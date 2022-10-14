@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import s from './SearchBar.module.css'
 
 function validationSearch (nameInput) {
     let error = '';
@@ -28,19 +29,22 @@ function SearchBar({onSearch}) {
     }
 
   return (
-    <form className='SearchBar' onSubmit={(e) => handleSubmit(e)}>
-        <input 
-        className='InputName' 
-        type='text' 
+    <div className={s.box}>
+      <form className={s.SearchBar} onSubmit={(e) => handleSubmit(e)}>
+        <input
+        class='input'
+        className={s.InputName} 
+        type='search' 
         placeholder='Pokemon name...'
         value={name}
         onChange={e=>handleInput(e)}
         />
-        <button className='SearchButton' type='submit' disabled={error !== ''}>
-            Search
+        <button className={s.SearchButton} type='submit' disabled={error !== ''}>
+          search
         </button>
-        <p>{error !== '' && <em>{error}</em>}</p>
-    </form>
+      </form>
+      <p><em className={s.em} hidden = {error === ''}>{error}</em></p>
+    </div>
   )
 }
 

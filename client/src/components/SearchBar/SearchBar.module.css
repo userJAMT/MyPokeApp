@@ -1,0 +1,58 @@
+/* From uiverse.io by @alexruix */
+.box {
+    margin: 0.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.SearchBar {
+    display: flex;
+    line-height: 28px;
+    align-items: center;
+    position: relative;
+    max-width: 190px;
+   }
+   
+.InputName {
+    width: 100%;
+    height: 40px;
+    line-height: 28px;
+    padding-left: 4rem;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    outline: none;
+    background-color:#835656ba;
+    color: black;
+    transition: .3s ease;
+   }
+   
+.InputName::placeholder {
+    color: black;
+   }
+   
+.InputName:focus, .InputName:hover {
+    outline: none;
+    border-color: rgba(234, 76, 76, 0.4);
+    background-color: rgba(165, 169, 52, 0.8);
+    box-shadow: 0 0 0 4px rgba(234, 76, 76, 0.1);
+   }
+   
+.SearchButton {
+    position: absolute;
+    left: 0.5rem;
+    fill: #9e9ea7;
+    border-radius: 15px;
+    background-image:linear-gradient(45deg, red, yellow);
+    padding: 2%;
+    width: fit-content;
+    height: fit-content;
+}
+   
+.em{
+    color: black;
+}
+   
+   
+   
+   
