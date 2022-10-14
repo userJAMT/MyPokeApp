@@ -10,7 +10,7 @@ function Pagination({totalPokemons, pokemonsPerPage, paginate, currentPage}) {
     <div className={s.pagination}>
         <ul className={s.list}>
             {currentPage > 1 
-            && <li><button onClick={() => paginate(currentPage-1)} >PREV</button></li>
+            && <li className={s.prev}><button onClick={() => paginate(currentPage-1)} >PREV</button></li>
             }
             {pageNumber?.map(number => (
                 <li key={number} className={s.number}>
@@ -18,7 +18,7 @@ function Pagination({totalPokemons, pokemonsPerPage, paginate, currentPage}) {
                 </li>
             ))}
             {currentPage < Math.ceil(totalPokemons/pokemonsPerPage) 
-            && <li><button onClick={()=>paginate(currentPage+1)} >NEXT</button></li>}
+            && <li className={s.next}><button onClick={()=>paginate(currentPage+1)} >NEXT</button></li>}
         </ul>
     </div>
   )

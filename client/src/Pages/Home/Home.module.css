@@ -6,7 +6,8 @@
     flex-direction: column;
     margin: 1rem;
     margin-top: 5rem;
-    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     border-radius: 40px;
     background-color:#664545
 }
@@ -15,7 +16,7 @@
     flex-direction: column;
     width: auto;
     align-items: center;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 .second{
     display: flex;
@@ -25,6 +26,7 @@
 }
 .main{
     margin: 1rem;
+    width: 100%;
 }
 
 .body{
@@ -45,4 +47,31 @@
 .notfound img{
     width: 200px;
     height: 300px;
+}
+
+.reload {
+    padding: 1em 1em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-image:linear-gradient(45deg, red, yellow);
+    border: solid black 2px;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    outline: none;
+}
+
+.reload:hover {
+    background-image:linear-gradient(-45deg, red, yellow);
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.748);
+    color: #000;
+    transform: translateY(-1px);
+}
+  
+.reload:active {
+    transform: translateY(-1px);
 }

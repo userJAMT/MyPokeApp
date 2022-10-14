@@ -60,7 +60,7 @@ function Filters({ allTypes, onFilter }) {
                     }
                 </select>
                 {filters.types?.map((el, i) => {
-                    return <span key={'span ' + i}>
+                    return <span key={'span ' + i} className={s.spantype}>
                         {el}
                         <button key={'button ' + i} type='button' onClick={() => handleDelete(el)}>X</button>
                     </span>

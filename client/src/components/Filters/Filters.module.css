@@ -1,9 +1,11 @@
 .filters{
+    width: cover;
     padding: 2rem;
     flex-direction: row;
     justify-content:space-between;
     border: solid black 1px;
     border-radius: 25px;
+    background-color: rgb(65, 111, 65);
 }
 .first{
     display: flex;
@@ -15,4 +17,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.spantype{
+    display: flex;
+    align-items: center;
+    border: solid 1px rgb(0, 0, 0);
+    padding: 1px 5px 3px 5px;
+    margin: 2px;
+    background-color: rgba(245, 245, 245, 0.647);
+    border-radius: 10px;
+}
+.spantype button{
+    background-color: rgba(245, 245, 245, 0.647);
+    border-radius: 10px;
+    padding: 0 2px 0 2px;
+    margin: 1px;
+    margin-left: 5px;
+    font-size: 0.7rem;
 }

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getById, clear } from '../../actions'
 import Loading from '../../components/Loading/Loading.jsx'
+import s from './Details.module.css'
 
 function Details() {
   const params = useParams()
@@ -17,23 +18,28 @@ function Details() {
   const pokemonDetail = useSelector(state => state.pokemonDetail)
 
   return (
-    <div> 
+    <div className={s.Details}> 
       {stateLoading ? <Loading/>
-      : <div>
-          <h4>ID: {pokemonDetail.id}</h4>
-          <img src={pokemonDetail.img} alt = 'Pokemon img' width='250px' height='250px'/>
-          <h1>{pokemonDetail.name}</h1>
-          {pokemonDetail.types?.map(e => {
-            return <div>{e}</div>
-          })}
-          <ul>
-            <li>HP: {pokemonDetail.hp}</li>
-            <li>attack: {pokemonDetail.attack}</li>
-            <li>defense: {pokemonDetail.defense}</li>
-            <li>speed: {pokemonDetail.speed}</li>
-            <li>height: {pokemonDetail.height}</li>
-            <li>weight: {pokemonDetail.weight}</li>
-          </ul>
+      : <div className={s.content}>
+
+          {/* <h4>{pokemonDetail.id}</h4> */}
+          <img src={pokemonDetail.img} alt='Pokemon img'/>
+          <h2>{pokemonDetail.name}</h2>
+          <div className={s.types}>
+            {pokemonDetail.types?.map(e => {
+              return <div className={s.type}>{e}</div>
+            })}
+          </div>
+          <div className={s.wrapper}>
+            <div className={s.box}>
+              <div className={s.stats}>HP: {pokemonDetail.hp}</div>
+              <div className={s.stats}>Attack: {pokemonDetail.attack}</div>
+              <div className={s.stats}>Defense: {pokemonDetail.defense}</div>
+              <div className={s.stats}>Speed: {pokemonDetail.speed}</div>
+              <div className={s.stats}>Height: {pokemonDetail.height}</div>
+              <div className={s.stats}>Weight: {pokemonDetail.weight}</div>
+            </div>
+          </div>
       </div>      
       }
     </div>

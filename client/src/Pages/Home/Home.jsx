@@ -50,7 +50,7 @@ function Home() {
 
   function handleReload(e) { 
     e.preventDefault()
-    dispatch(backup()) // Si agrego un delete usar un dispatch(getPokemons()) para traer actualizada la data
+    dispatch(getPokemons())
   }
 
   async function onFilter (filters){
@@ -83,7 +83,7 @@ function Home() {
       <div className={s.header}>
         <div className={s.first}>
           <SearchBar onSearch={onSearch}/>
-          <button onClick={e => handleReload(e)}> Reload all pokemons </button>
+          <button className={s.reload} onClick={e => handleReload(e)}> Reload all pokemons </button>
           <Sort onSort={onSort}/>
         </div>
         <div className={s.second}>
