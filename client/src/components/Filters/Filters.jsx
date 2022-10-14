@@ -43,9 +43,9 @@ function Filters({ allTypes, onFilter }) {
                 className={s.typesSelection}
                 onChange={e => handleFilterByType(e)}
                 disabled = {filters.types.length >= 2}
-                defaultValue='default'
+                defaultValue='all'
                 >
-                    <option value='default' disabled> Types </option>
+                    <option value='all'> All </option>
                     {
                     allTypes?.map((el, i) =>{
                         return (

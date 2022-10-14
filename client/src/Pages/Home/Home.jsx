@@ -30,6 +30,7 @@ function Home() {
   const allTypes = useSelector(state => state.types);
   const loading = useSelector(state => state.loading);
   const notFound = useSelector(state => state.notFound);
+  const [filter, setFilter] = useState(false)
   
   // Pagination
   const [order, setOrder] = useState('')
@@ -53,15 +54,25 @@ function Home() {
     dispatch(getPokemons())
   }
 
+  function showFilter(){
+    filter? setFilter(false) : setFilter(true)
+  }
+
   async function onFilter (filters){
     dispatch(backup())
     if(filters.types.length > 0){
-      for (let i = 0; i < filters.types.length; i++) {
-        dispatch(filterByType(filters.types[i]))        
+      if(filters.types.includes('all')){
+        dispatch(backup())
+      }
+      else{
+        for (let i = 0; i < filters.types.length; i++) {
+          dispatch(filterByType(filters.types[i]))        
+        }
       }
     }
     if(filters.origin !== '') dispatch(filterCreated(filters.origin))
     setCurrentPage(1)
+    setFilter(false)
     setOrder(filters)
   }
 
@@ -86,9 +97,11 @@ function Home() {
           <button className={s.reload} onClick={e => handleReload(e)}> Reload all pokemons </button>
           <Sort onSort={onSort}/>
         </div>
-        <div className={s.second}>
+        <button className={s.filter} onClick={()=>showFilter()}>Filter</button>
+        {filter && <div className={s.second}>
           <Filters allTypes={allTypes} onFilter={onFilter}/>
         </div>
+        }
       </div>
 
       <div className={s.main}>
