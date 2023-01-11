@@ -11,11 +11,9 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
 
-// sequelize.authenticate()
-// .then (()=>console.log('base de datos conectada'))
-// .catch ((e)=>console.log('error no conecta la base de datos',e))
-
-
+sequelize.authenticate()
+.then (()=>console.log('base de datos conectada'))
+.catch ((e)=>console.log('error no conecta la base de datos',e))
 
 const basename = path.basename(__filename);
 
@@ -27,7 +25,7 @@ fs.readdirSync(path.join(__dirname, '/models'))
   .forEach((file) => {
     modelDefiners.push(require(path.join(__dirname, '/models', file)));
   });
-// Injectamos la conexion (sequelize) a todos los modelos
+// Inyectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach(model => model(sequelize));
 // Capitalizamos los nombres de los modelos ie: product => Product
 let entries = Object.entries(sequelize.models);
