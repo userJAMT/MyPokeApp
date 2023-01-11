@@ -1,9 +1,5 @@
-const { DataTypes, UUIDV4 } = require('sequelize');
-const { get } = require('../routes/pokemon');
-// Exportamos una funcion que define el modelo
-// Luego le injectamos la conexion a sequelize.
+const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
-  // defino el modelo
   sequelize.define('pokemon', {
 
     id:{
