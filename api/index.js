@@ -17,12 +17,39 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
+const server = require("./src/app.js");
+const { getPokemonsInApi, getTypesInApi } = require("./src/controllers/api.js");
+const { conn, Pokemon, Type } = require("./src/db.js");
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(async () => {
   server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+    console.log("%s listening at 3001"); // eslint-disable-line no-console
   });
+  try {
+    let types = await Type.findAll();
+    if (!types.length) {
+      console.log("No hay Tipos, obteniendo de la API");
+      types = await getTypesInApi();
+      for (let i = 0; i < types.length; i++) {
+        await Type.create(types[i]);
+      }
+      console.log("Realizado con éxito");
+    } else console.log("Ya existen Tipos en la base de datos");
+    let pokemons = await Pokemon.findAll();
+    if (!pokemons.length) {
+      console.log("No hay Pokemons, obteniendo de la API");
+      pokemons = await getPokemonsInApi();
+      for (let i = 0; i < pokemons.length; i++) {
+        let pokemon = await Pokemon.create(pokemons[i]);
+        let type = await Type.findAll({
+          where: { name: pokemons[i].types },
+        });
+        pokemon.addType(type);
+      }
+      console.log("Realizado con éxito");
+    } else console.log("Ya existen Pokemons en la base de datos");
+  } catch (error) {
+    console.log(error.message);
+  }
 });
