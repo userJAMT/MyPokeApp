@@ -57,7 +57,7 @@ export default function reducer (state = initialState, action){
                 ...state,
                 notFound: false,
                 loading: false,
-                pokemons: [action.payload]
+                pokemons: action.payload
             }
 
         case FILTER_POKEMON_BY_TYPE:

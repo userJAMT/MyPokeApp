@@ -1,11 +1,12 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import s from './SearchBar.module.css'
 
 function validationSearch (nameInput) {
     let error = '';
     const validName = /^[a-zA-ZñÑ\s]+$/i;
-    if (!validName.test(nameInput)) {
+    if (!validName.test(nameInput) && nameInput) {
       error = "Sorry, only letters are allowed";
     }
     return error;
@@ -20,13 +21,19 @@ function SearchBar({onSearch}) {
       e.preventDefault()
       setName(e.target.value)
       setError(validationSearch(e.target.value))
+      
     }
 
     function handleSubmit (e) {
       e.preventDefault();
-      if(name[0] !== ' ') onSearch(name.toLowerCase());
+      if(!name) onSearch('');
       setName('');
     }
+
+    useEffect(() => {
+      if(name[0] !== ' ' && name) onSearch(name.toLowerCase());
+    }, [name])
+    
 
   return (
     <div className={s.box}>

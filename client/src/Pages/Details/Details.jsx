@@ -27,7 +27,7 @@ function Details() {
           <h2>{pokemonDetail.name}</h2>
           <div className={s.types}>
             {pokemonDetail.types?.map(e => {
-              return <div className={s.type}>{e}</div>
+              return <div className={s.type}>{e.name}</div>
             })}
           </div>
           <div className={s.wrapper}>

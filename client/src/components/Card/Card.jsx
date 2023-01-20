@@ -8,7 +8,7 @@ function Card({name, types, img}) {
         <h2> {name} </h2>
         <img className={s.img} src={img} alt = 'img not found'/>
         {types?.map((e,i)=>{
-          return <h4 key={i}>{e}</h4>
+          return <h4 key={i}>{e.name}</h4>
         })} 
       </div>
     </div>
