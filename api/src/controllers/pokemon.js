@@ -19,8 +19,6 @@ const getPokemons = async (req, res) => {
     through: { attributes: [] },
   };
 
-  console.log(conditions);
-
   try {
     // Search pokemons
     const data = await Pokemon.findAll(conditions);
