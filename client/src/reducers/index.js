@@ -63,15 +63,15 @@ export default function reducer (state = initialState, action){
         case FILTER_POKEMON_BY_TYPE:
             return {
                 ...state,
-                pokemons: state.pokemons.filter(p=>p.types.includes(action.payload))
+                pokemons: state.pokemons.filter(p=>p.types.map(t=>t.name).includes(action.payload))
             }
 
         case FILTER_POKEMON_CREATED:
             return {
                 ...state,
                 pokemons: action.payload === 'db' 
-                ? state.pokemons.filter(p=>isNaN(p.id))
-                : state.pokemons.filter(p=>!isNaN(p.id))                 
+                ? state.pokemons.filter(p=>p.id > 40)
+                : state.pokemons.filter(p=>p.id <= 40)                 
             }
 
         case SORT_BY_NAME:
