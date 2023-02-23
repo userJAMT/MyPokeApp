@@ -3,6 +3,7 @@ import { createPokemon, getTypes, getPokemons } from '../../actions/index.js';
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import validations from '../../functions/validations.js';
+import s from './Create.module.css';
 
 function Create() {
 
@@ -83,7 +84,7 @@ function Create() {
   }
 
   return (
-    <div>
+    <div className={s.content}>
       <h2> CREATE POKEMON </h2>
       <br/>
       <form onSubmit={handleOnSubmit}>

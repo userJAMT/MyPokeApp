@@ -1,0 +1,10 @@
+.content {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  border: #8d99ae solid 10px;
+  border-radius: 25px;
+  background-color: #8d99ae;
+}

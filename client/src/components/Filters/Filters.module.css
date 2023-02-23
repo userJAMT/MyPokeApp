@@ -5,7 +5,7 @@
     justify-content:space-between;
     border: solid black 1px;
     border-radius: 25px;
-    background-color: rgb(65, 111, 65);
+    background-color: #EDF2F4;
 }
 .first{
     display: flex;

@@ -12,10 +12,10 @@
 }
 
 .body button {
-    --glow-color: rgba(190, 27, 27, 0.853);
-    --glow-spread-color: white;
-    --enhanced-glow-color: white;
-    --btn-color: rgba(252, 252, 67, 0.805);
+    --glow-color: #edf2f4a8;
+    --glow-spread-color: #ef233ba6;
+    --enhanced-glow-color: #edf2f4bc;
+    --btn-color: #d90427c1;
     border: .25em solid var(--glow-color);
     padding: 1em 3em;
     color: var(--glow-color);

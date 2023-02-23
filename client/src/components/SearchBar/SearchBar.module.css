@@ -19,10 +19,10 @@
     height: 40px;
     line-height: 28px;
     padding-left: 4rem;
-    border: 2px solid rgba(0, 0, 0, 0.5);
+    border: 2px solid #2B2D42;
     border-radius: 8px;
     outline: none;
-    background-color:#835656ba;
+    background-color:#EDF2F4;
     color: black;
     transition: .3s ease;
    }
@@ -33,8 +33,8 @@
    
 .InputName:focus, .InputName:hover {
     outline: none;
-    border-color: rgba(234, 76, 76, 0.4);
-    background-color: rgba(165, 169, 52, 0.8);
+    border-color: #EDF2F4;
+    background-color: #EF233C;
     box-shadow: 0 0 0 4px rgba(234, 76, 76, 0.1);
    }
    
@@ -43,10 +43,11 @@
     left: 0.5rem;
     fill: #9e9ea7;
     border-radius: 15px;
-    background-image:linear-gradient(45deg, red, yellow);
+    background-image:linear-gradient(-45deg, #EF233C, #EDF2F4);
     padding: 2%;
     width: fit-content;
     height: fit-content;
+    border: #2B2D42
 }
    
 .em{

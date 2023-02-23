@@ -6,7 +6,7 @@
 .content {
     padding: 2rem;
     border-radius: 30px;
-    background: #e0e0e0b6;
+    background: #8D99AE;
     box-shadow: 15px 15px 30px #3c3c3cbb, -15px -15px 30px #3c3c3cbb;
     width: fit-content;
 }
@@ -28,23 +28,23 @@
     margin: 10px;
 }
 .stats{
-    border-bottom: solid black;
+    border-bottom: solid #2B2D42;
     border-top: ridge;
     border-radius: 10px;
-    color: whitesmoke;
-    background-color: rgb(65, 72, 193);
+    color: #2B2D42;
+    background-color: #EDF2F4;
     padding: 0px 2px 1px 2px;
 }
 .content h4{
     margin-bottom: 0.5rem;
     border: none;
-    color: whitesmoke;
+    color: #2B2D42;
     border-radius: 10px;
     width: fit-content;
     position: relative;
     left: 50%;
     padding: 1px 4px 4px 4px;
-    background-color: rgba(40, 37, 246, 0.671);
+    background-color: #EDF2F4;
     transform: translate(-50%);
 }
 .types{
@@ -54,10 +54,10 @@
 .type{
     margin-left: 10px;
     margin-right: 10px;
-    color: whitesmoke;
-    border: solid black 1px;
+    color: #2B2D42;
+    border: solid #2B2D42 1px;
     padding: 5px;
     padding-top: 1px;
     border-radius: 10px;
-    background-color: rgba(40, 37, 246, 0.671);
+    background-color: #EDF2F4;
 }
