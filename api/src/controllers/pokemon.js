@@ -12,7 +12,6 @@ const getPokemons = async (req, res) => {
 
   // Add conditions
   conditions.where = where;
-  conditions.attributes = ["img", "name", "attack", "id"];
   conditions.include = {
     model: Type,
     attributes: ["name"],
